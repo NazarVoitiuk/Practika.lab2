@@ -1,28 +1,24 @@
-#ifndef WORKERANT_H
-#define WORKERANT_H
+// WorkerAnt.h
+#pragma once
+#include <cstdlib>
+#include <ctime>
 
-#include "Ant.h" // Включаємо базовий клас
-#include <cmath>
-
-class WorkerAnt : public Ant {
-private:
-    double homeX, homeY; // Початкова позиція мурахи
-    bool returning;      // Чи повертається мураха додому
-
+class WorkerAnt {
 public:
-    WorkerAnt(double x, double y, double V) : Ant(x, y, V), homeX(x), homeY(y), returning(false) {}
-
-    void move() override {
-        if (!returning) {
-            if (x > 0) x -= V;
-            if (y > 0) y -= V;
-            if (x <= 0 && y <= 0) returning = true; // Досяг кута [0,0]
-        }
-        else {
-            if (x < homeX) x += V;
-            if (y < homeY) y += V;
+    WorkerAnt(int x, int y, int speed) : x(x), y(y), speed(speed) {
+        std::srand(std::time(0)); // РёРЅРёС†РёР°Р»РёР·Р°С†РёСЏ РіРµРЅРµСЂР°С‚РѕСЂР° СЃР»СѓС‡Р°Р№РЅС‹С… С‡РёСЃРµР»
+    }
+    void move() {
+        int direction = std::rand() % 4;
+        switch (direction) {
+        case 0: x += speed; break; // РІРїСЂР°РІРѕ
+        case 1: x -= speed; break; // РІР»РµРІРѕ
+        case 2: y += speed; break; // РІРІРµСЂС…
+        case 3: y -= speed; break; // РІРЅРёР·
         }
     }
+    int getX() const { return x; }
+    int getY() const { return y; }
+private:
+    int x, y, speed;
 };
-
-#endif // WORKERANT_H
