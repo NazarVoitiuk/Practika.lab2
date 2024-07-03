@@ -1,22 +1,24 @@
-#ifndef WARRIORANT_H
-#define WARRIORANT_H
+// WarriorAnt.h
+#pragma once
+#include <cstdlib>
+#include <ctime>
 
-#include "Ant.h" // Включаємо базовий клас
-#include <cmath>
-
-class WarriorAnt : public Ant {
-private:
-    double R;    // Радіус кола
-    double angle; // Поточний кут
-
+class WarriorAnt {
 public:
-    WarriorAnt(double x, double y, double V, double R) : Ant(x, y, V), R(R), angle(0) {}
-
-    void move() override {
-        angle += V / R;
-        x = R * cos(angle);
-        y = R * sin(angle);
+    WarriorAnt(int x, int y, int speed, int radius) : x(x), y(y), speed(speed), radius(radius) {
+        std::srand(std::time(0)); // РёРЅРёС†РёР°Р»РёР·Р°С†РёСЏ РіРµРЅРµСЂР°С‚РѕСЂР° СЃР»СѓС‡Р°Р№РЅС‹С… С‡РёСЃРµР»
     }
+    void move() {
+        int direction = std::rand() % 4;
+        switch (direction) {
+        case 0: x += speed; break; // РІРїСЂР°РІРѕ
+        case 1: x -= speed; break; // РІР»РµРІРѕ
+        case 2: y += speed; break; // РІРІРµСЂС…
+        case 3: y -= speed; break; // РІРЅРёР·
+        }
+    }
+    int getX() const { return x; }
+    int getY() const { return y; }
+private:
+    int x, y, speed, radius;
 };
-
-#endif // WARRIORANT_H
