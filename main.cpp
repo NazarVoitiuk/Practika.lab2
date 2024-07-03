@@ -1,4 +1,5 @@
-﻿#include "pch.h" // Додаємо цю директиву на початку файлу
+// main.cpp
+#include "pch.h" 
 #include <iostream>
 #include "WorkerAnt.h"
 #include "WarriorAnt.h"
